@@ -1,0 +1,13 @@
+server:
+  port: 8081
+logging:
+  level:
+    com.yx.springcloud: debug
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/ssm?useSSL=false
+    username: root
+    password: cherished
+mybatis:
+  type-aliases-package: com.cloud.userserver.pojo
