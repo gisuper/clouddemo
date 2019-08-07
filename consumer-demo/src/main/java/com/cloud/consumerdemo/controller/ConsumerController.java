@@ -1,5 +1,7 @@
 package com.cloud.consumerdemo.controller;
 
+import com.cloud.consumerdemo.feignclient.ConsumerFeignClient;
+import com.cloud.consumerdemo.pojo.Account;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConsumerController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private ConsumerFeignClient feignClient;
 
 
     @GetMapping("/testTemplate")
@@ -34,13 +35,15 @@ public class ConsumerController {
             //设置打开回路并启动回退逻辑的错误比率。
             @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "50")
     })
-    public String testTemplate(){
-        String account = restTemplate.getForObject("http://user-server/account/1", String.class);
+    public Account testTemplate(){
+        Account account =feignClient.getAccount();
         log.debug("account :  " + account.toString());
         return account;
     }
 
-    public String testTemplateFail(){
-        return "访问出错";
+    public Account testTemplateFail(){
+        Account account = new Account();
+        account.setName("访问出错啦");
+        return account;
     }
 }
