@@ -1,0 +1,12 @@
+server:
+  port: 8082
+logging:
+  level:
+    com.yx.springcloud: debug
+spring:
+  application:
+    name: consumer-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10010/eureka,http://127.0.0.1:10011/eureka
