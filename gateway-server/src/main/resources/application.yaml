@@ -9,9 +9,7 @@ eureka:
       defaultZone: http://127.0.0.1:10010/eureka,http://127.0.0.1:10011/eureka
 zuul:
   routes:
-    consumserver:
-      path: /consumer-server/**
-      serviceId: consumer-server
+    consumer-server: /consumer-server/**
   host: #ribbon的超时时间要小于zuul超时时间 。
     connect-timeout-millis: 15000 #HTTP连接超时要比Hystrix的大
     socket-timeout-millis: 60000   #socket超时

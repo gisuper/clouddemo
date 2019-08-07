@@ -16,7 +16,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 3000
 feign:
   hystrix:
     enabled: true #开启feign熔断功能
