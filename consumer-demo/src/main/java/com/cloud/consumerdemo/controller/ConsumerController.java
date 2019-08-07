@@ -2,7 +2,6 @@ package com.cloud.consumerdemo.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +25,7 @@ public class ConsumerController {
 
 
     @GetMapping("/testTemplate")
-    @HystrixCommand(commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "30000")
-    })
+    @HystrixCommand
     public String testTemplate(){
         String account = restTemplate.getForObject("http://user-server/account/1", String.class);
         log.debug("account :  " + account.toString());
