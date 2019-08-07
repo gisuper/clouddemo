@@ -9,5 +9,11 @@ spring:
     url: jdbc:mysql://127.0.0.1/ssm?useSSL=false
     username: root
     password: cherished
+  application:
+    name: user-server
 mybatis:
   type-aliases-package: com.cloud.userserver.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10010/eureka,http://127.0.0.1:10011/eureka
