@@ -2,7 +2,7 @@ server:
   port: 8082
 logging:
   level:
-    com.yx.springcloud: debug
+    com.cloud.consumerdemo: debug
 spring:
   application:
     name: consumer-server
@@ -17,3 +17,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 2000
+feign:
+  hystrix:
+    enabled: true #开启feign熔断功能

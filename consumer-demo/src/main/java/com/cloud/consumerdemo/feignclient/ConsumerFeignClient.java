@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * Created by yangxiong on 2019/8/7.
  */
-@FeignClient(name ="user-server")
+@FeignClient(name ="user-server",fallback = FeignClientFallback.class)
 public interface ConsumerFeignClient {
 
     @GetMapping("/account/1")
