@@ -1,5 +1,6 @@
 package com.cloud.consumerdemo.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/consumer")
+@DefaultProperties(defaultFallback = "testTemplateFail")
 public class ConsumerController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class ConsumerController {
 
 
     @GetMapping("/testTemplate")
-    @HystrixCommand(fallbackMethod = "testTemplateFail")
+    @HystrixCommand
     public String testTemplate(){
         String account = restTemplate.getForObject("http://user-server/account/1", String.class);
         log.debug("account :  " + account.toString());
